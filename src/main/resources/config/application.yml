@@ -5,11 +5,9 @@ spring:
     active: local
   lifecycle:
     timeout-per-shutdown-phase: 10s # graceful shutdown 유예시간 설정
-jwt:
-  secret: hanexSecretKey
-#--------------------------
-# i18n
-#--------------------------
+  #--------------------------
+  # i18n
+  #--------------------------
   messages:
     basename: classpath:i18n/messages, classpath:i18n/error
     encoding: UTF-8
@@ -47,3 +45,8 @@ management:
       probes.enabled: true
       defaults.enabled: true
 
+#--------------------------
+# jwt secret
+#--------------------------
+jwt:
+  secret: hanexSecretKey

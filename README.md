@@ -1,5 +1,5 @@
-# starter
-한 Express 템플릿 프로젝트 - Starter
+# auth-service
+한 Express 템플릿 - auth-service
 
 ## Project 기술 스택
 - Spring Boot 2.7.12 , jdk 17, gradle 7.6.1
