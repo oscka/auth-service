@@ -5,6 +5,8 @@ spring:
     active: local
   lifecycle:
     timeout-per-shutdown-phase: 10s # graceful shutdown 유예시간 설정
+jwt:
+  secret: hanexSecretKey
 #--------------------------
 # i18n
 #--------------------------
