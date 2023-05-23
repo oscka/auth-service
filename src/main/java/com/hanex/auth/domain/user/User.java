@@ -2,7 +2,6 @@ package com.hanex.auth.domain.user;
 
 import com.hanex.auth.common.util.encrypt.EncryptString;
 import com.hanex.auth.controller.user.dto.UserDto;
-import com.hanex.auth.domain.user.common.Gender;
 import com.hanex.auth.domain.user.common.UserRole;
 import com.hanex.auth.domain.user.common.UserState;
 import lombok.Builder;
@@ -21,7 +20,7 @@ import java.util.UUID;
 @Builder
 @Getter
 @ToString
-@Table("tb_user")
+@Table("user_tb")
 public class User {
 
 	@Id
@@ -33,11 +32,9 @@ public class User {
 
 	private UserState state;
 
-	private Gender gender;
-
 	private UserRole role;
 
-	private EncryptString email;
+	private String email;
 
 	private String password;
 
@@ -64,7 +61,7 @@ public class User {
 		return UserDto.UserInfoResponse.builder()
 			.createdAt(this.createdAt)
 			.name(this.name)
-			.email(this.email.getValue())
+			.email(this.email)
 			.loginId(this.loginId)
 			.state(this.state)
 			.build();

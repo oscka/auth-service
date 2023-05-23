@@ -3,6 +3,7 @@ package com.hanex.auth.common.security;
 
 import com.hanex.auth.service.UserService;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -33,16 +34,15 @@ public class JwtTokenProvider {
 
         Claims claims = Jwts.claims().setSubject(userName); // JWT payload에 저장되는 정보단위
 
-        Date now = new Date();
         return Jwts.builder()
-                .setSubject("JWT token") // 제목
+                .signWith(SignatureAlgorithm.HS256,secret.getBytes()) // 키와, 알고리즘을 넣는다.
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
+                .setSubject("JWT token") // 제목
                 .setIssuer("hanex") // 발급자
                 .setAudience("user") // 대상자
-                .setIssuedAt(now) // 토큰 발행 시간 정보
+                .setIssuedAt(new Date()) // 토큰 발행 시간 정보
                 .setClaims(claims) // 정보저장
-                .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
-                .signWith(SignatureAlgorithm.HS256, Base64.getDecoder().decode(secret)) // 키와, 알고리즘을 넣는다.
                 .compact(); // 위 설정대로 JWT 토큰을 생성한다는 의미.
     }
 
@@ -51,16 +51,15 @@ public class JwtTokenProvider {
     public String createRefreshToken(String userName) {
         Claims claims = Jwts.claims().setSubject(userName);
         Date now = new Date();
-
         return Jwts.builder()
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setExpiration(new Date(now.getTime() + 1000000))
                 .setIssuer("hanex")
                 .setSubject("JWT token")
                 .setAudience("user")
                 .setIssuedAt(now)
                 .setClaims(claims)
-                .setExpiration(new Date(now.getTime() + 1000000))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
     }
 

@@ -18,7 +18,7 @@ public interface UserRepository extends CrudRepository<User, UUID> , UserReposit
 	// existsById
 
 	@Override
-	void deleteById(UUID uuid);
+	void deleteById(UUID id);
 
 	@Override
 	void delete(User entity);

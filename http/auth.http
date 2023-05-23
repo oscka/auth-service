@@ -1,0 +1,80 @@
+#-----------------------
+# auth.http
+#-----------------------
+
+# 회원가입
+POST /v1/users
+Content-Type: application/json
+Host: localhost:8080
+
+{
+  "name" : "홍길동",
+  "email" : "test@demo.com",
+  "loginId" : "test",
+  "password" : "test1234",
+  "role": "ROLE_CLIENT",
+  "phone" : "01012345678",
+  "state" : "ACTIVE"
+}
+
+
+###
+# 로그인
+POST /security/jwtlogin
+Host: localhost:8080
+Authorization: Bearer <jwt-token>
+Content-Type: application/json
+
+{
+  "loginId" : "test",
+  "password" : "test1234"
+}
+
+###
+# 테스트 용도 > 토큰생성 테스트
+GET /security/createtoken?loginId=test
+Host: localhost:8080
+
+
+###
+# 사용자 조회 (detail) (회원조회-detail)
+# /v1/users/{loginId}
+GET /v1/users/test
+Host: localhost:8080
+Authorization: Bearer <jwt-token>
+
+###
+# 사용자 수정 (회원수정)
+# PUT /v1/users/{id}
+PUT /v1/users/3
+Host: localhost:8080
+Authorization: Bearer <jwt-token>
+Content-Type: application/json
+
+{
+  "name" : "홍길동",
+  "email" : "test@demo.com",
+  "password" : "test1234",
+  "state" : "ACTIVE"
+}
+
+###
+# 사용자 삭제 (회원탈퇴)
+# DELETE /v1/users/{id}
+DELETE /v1/users/1
+Host: localhost:8080
+Authorization: Bearer <jwt-token>
+
+
+
+
+
+#-----------------------
+# admin.http
+#-----------------------
+
+###
+# 사용자 리스트 조회 (회원 list 조회 > admin 권한)
+GET /v1/users
+Host: localhost:8080
+Authorization: Bearer <jwt-token>

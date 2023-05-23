@@ -21,9 +21,9 @@ public class UserService {
 	 */
 	public void register(UserDto.SaveRequest save){
 
-		if (existsByLoginId(save.getLoginId())){
-			throw new RuntimeException("아이디가 이미 존재합니다.");
-		}
+//		if (existsByLoginId(save.getLoginId())){
+//			throw new RuntimeException("아이디가 이미 존재합니다.");
+//		}
 
 		userRepository.insert(save.toEntity());
 	}

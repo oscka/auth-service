@@ -2,7 +2,7 @@ spring:
   application:
     name: starter
   profiles:
-    active: local
+    active: dev
   lifecycle:
     timeout-per-shutdown-phase: 10s # graceful shutdown 유예시간 설정
   #--------------------------
@@ -49,4 +49,5 @@ management:
 # jwt secret
 #--------------------------
 jwt:
-  secret: hanexSecretKey
+  secret: MyNickNameisErjuerAndNameisMinsu
+  #secret: hanexSecretKey

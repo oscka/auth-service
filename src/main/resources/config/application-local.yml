@@ -5,12 +5,14 @@ server.port: 18080
 
 spring:
   datasource:
+#    platform: h2
     driver-class-name: org.h2.Driver
-    #initialization-mode: always
     username: sa
     password:
     url: jdbc:h2:mem:starter;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
-    platform: h2
+    initialization-mode: always
+    schema: classpath:schema-h2.sql
+    #data: classpath:data-h2.sql
   h2:
     console.enabled: true
   redis:
