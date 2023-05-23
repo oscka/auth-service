@@ -30,10 +30,6 @@ Content-Type: application/json
   "password" : "test1234"
 }
 
-###
-# 테스트 용도 > 토큰생성 테스트
-GET /security/createtoken?loginId=test
-Host: localhost:8080
 
 
 ###

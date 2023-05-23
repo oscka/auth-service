@@ -1,6 +1,7 @@
 package com.hanex.auth.common.security;
 
 
+import com.hanex.auth.domain.user.User;
 import com.hanex.auth.service.UserService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -29,37 +30,36 @@ public class JwtTokenProvider {
 
     // 로그인 서비스 할 때 같이 사용합니다. 엑세스 토큰 생성
     // header, payload, Signature 세 부분으로 구성
-    public String createAccessToken(String userName) {
+    public String createAccessToken(User user) {
         int expireTime = 100000;
-
-        Claims claims = Jwts.claims().setSubject(userName); // JWT payload에 저장되는 정보단위
 
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,secret.getBytes()) // 키와, 알고리즘을 넣는다.
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
-                .setSubject("JWT token") // 제목
-                .setIssuer("hanex") // 발급자
+                .setIssuer(SecurityConstant.TOKEN_ISSUER) // 발급자
                 .setAudience("user") // 대상자
                 .setIssuedAt(new Date()) // 토큰 발행 시간 정보
-                .setClaims(claims) // 정보저장
+                .setSubject(String.valueOf(user.getId())) // 제목
+                .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
                 .compact(); // 위 설정대로 JWT 토큰을 생성한다는 의미.
     }
 
     // 로그인 서비스 할 때 같이 사용합니다.
     // 리프레시 토큰 생성 -- 엑세스토큰으로 요청을 먼저 -- 탈취에 취약함 -> 엑세스만 사용하다가 만료되면 리프레쉬토큰으로 다시 엑세스토큰을 발급 받아 사용
-    public String createRefreshToken(String userName) {
-        Claims claims = Jwts.claims().setSubject(userName);
+    public String createRefreshToken(User user) {
+
         Date now = new Date();
+
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setExpiration(new Date(now.getTime() + 1000000))
-                .setIssuer("hanex")
-                .setSubject("JWT token")
+                .setIssuer(SecurityConstant.TOKEN_ISSUER) // 발급자
                 .setAudience("user")
                 .setIssuedAt(now)
-                .setClaims(claims)
+                .setSubject(String.valueOf(user.getId())) // 제목
+                .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
                 .compact();
     }
 

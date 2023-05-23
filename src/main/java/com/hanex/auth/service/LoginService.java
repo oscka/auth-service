@@ -26,12 +26,6 @@ public class LoginService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public Map<String,Object> createTokenTest(String loginId){
-        String token = jwtTokenProvider.createAccessToken(loginId);
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("result", token);
-        return map;
-    }
 
     /**
      * login > jwt access token 발급
@@ -50,10 +44,10 @@ public class LoginService {
         }
 
         // 엑세스 토큰 생성
-        String jwtAccessToken = jwtTokenProvider.createAccessToken(foundUser.getLoginId());
+        String jwtAccessToken = jwtTokenProvider.createAccessToken(foundUser);
 
         // Refresh 토큰 생성
-        String jwtRefreshToken = jwtTokenProvider.createRefreshToken(foundUser.getLoginId());
+        String jwtRefreshToken = jwtTokenProvider.createRefreshToken(foundUser);
 
         log.info("JWT 엑세스 토큰: " + jwtAccessToken); // JWT 토큰 출력
         log.info("JWT 리프래쉬 토큰: " + jwtRefreshToken); // JWT 토큰 출력

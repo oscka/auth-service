@@ -29,13 +29,6 @@ public class LoginController {
     private final LoginService loginService;
 
 
-    // 토큰 생성 테스트 localhost:portnumber/security?username=무작위값 입력하면 토큰 받환환
-    @Operation(description = "토큰 생성 테스트")
-    @GetMapping("/createtoken")
-    public Map<String, Object> createToken(@RequestParam(value = "loginId") String loginId) {
-        return loginService.createTokenTest(loginId);
-    }
-
     @Operation(description = "토큰 생성 테스트")
     @PostMapping("/jwtlogin")
     @Transactional
