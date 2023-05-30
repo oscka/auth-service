@@ -1,4 +1,4 @@
-package com.hanex.auth.domain.user;
+package com.hanex.auth.user.domain;
 
 import com.hanex.auth.common.util.jdbc.WithInsert;
 import org.springframework.data.jdbc.repository.query.Modifying;

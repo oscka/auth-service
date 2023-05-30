@@ -1,6 +1,6 @@
 package com.hanex.auth.common.api;
 
-import com.hanex.auth.common.util.EnumType;
+import com.hanex.auth.common.enums.EnumType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

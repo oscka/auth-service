@@ -2,7 +2,7 @@
 <Configuration status="info" monitorInterval="30">
 
     <Properties>
-        <Property name="LOG_PATH">./logs/starter.log</Property>
+        <Property name="LOG_PATH">./logs/auth.log</Property>
 
         <!-- log format -->
         <!--<Property name="LOG_FORMAT">%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Property>-->

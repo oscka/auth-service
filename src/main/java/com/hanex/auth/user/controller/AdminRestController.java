@@ -1,4 +1,4 @@
-package com.hanex.auth.controller.admin;
+package com.hanex.auth.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

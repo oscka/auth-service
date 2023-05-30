@@ -1,11 +1,11 @@
-package com.hanex.auth.controller.user.dto;
+package com.hanex.auth.user.dto;
 
 import java.util.UUID;
 
 import com.hanex.auth.common.util.CommonEncoder;
-import com.hanex.auth.domain.user.User;
+import com.hanex.auth.user.domain.User;
 import com.hanex.auth.common.enums.UserRole;
-import com.hanex.auth.common.enums.UserState;
+import com.hanex.auth.common.enums.UserStatus;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -30,7 +30,7 @@ public class UserDto{
 		private String name;
 
 		@NotNull
-		private UserState state;
+		private UserStatus userStatus;
 
 		@Pattern(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
 		@NotBlank(message = "{validation.notBlank.email}")
@@ -50,12 +50,11 @@ public class UserDto{
 				.id(UUID.randomUUID())
 				.loginId(this.loginId)
 				.name(this.name)
-				.state(this.state)
+				.userStatus(this.userStatus)
 				.phone(this.phone)
 				.role(this.role)
 				.password(new CommonEncoder().encode(this.password))
-				//.email(new EncryptString(this.email))
-					.email(this.email)
+				.email(this.email)
 				.build();
 		}
 
@@ -71,9 +70,13 @@ public class UserDto{
 
 		private String name;
 
-		private UserState state;
+		private UserStatus userStatus;
+
+		private UserRole role;
 
 		private String email;
+
+		private String phone;
 
 		private Instant createdAt;
 
@@ -101,7 +104,6 @@ public class UserDto{
 			return User.builder()
 					.name(this.name)
 					.password(new CommonEncoder().encode(this.password))
-					//.email(new EncryptString(this.email))
 					.email(this.email)
 					.build();
 		}

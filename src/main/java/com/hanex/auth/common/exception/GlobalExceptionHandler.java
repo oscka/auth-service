@@ -1,4 +1,4 @@
-package com.hanex.auth.error;
+package com.hanex.auth.common.exception;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

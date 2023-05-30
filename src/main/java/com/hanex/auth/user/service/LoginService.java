@@ -1,9 +1,9 @@
-package com.hanex.auth.service;
+package com.hanex.auth.user.service;
 
 import com.hanex.auth.common.security.JwtTokenProvider;
-import com.hanex.auth.controller.user.dto.UserDto;
-import com.hanex.auth.domain.user.User;
-import com.hanex.auth.domain.user.UserRepository;
+import com.hanex.auth.user.dto.UserDto;
+import com.hanex.auth.user.domain.User;
+import com.hanex.auth.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
