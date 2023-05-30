@@ -3,7 +3,7 @@ package com.hanex.auth.service;
 import com.hanex.auth.controller.user.dto.UserDto;
 import com.hanex.auth.domain.user.User;
 import com.hanex.auth.domain.user.UserRepository;
-import com.hanex.auth.error.exception.NotFoundException;
+import com.hanex.auth.common.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

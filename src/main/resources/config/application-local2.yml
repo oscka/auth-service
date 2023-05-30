@@ -1,0 +1,17 @@
+###################
+# local
+###################
+server.port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hanexdb
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: hanex1234
+  redis:
+    host: host.docker.internal
+    port: 6001
+
+logging:
+  config: classpath:log4j2-dev.xml

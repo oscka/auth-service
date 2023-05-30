@@ -1,9 +1,8 @@
 package com.hanex.auth.domain.user;
 
-import com.hanex.auth.common.util.encrypt.EncryptString;
 import com.hanex.auth.controller.user.dto.UserDto;
-import com.hanex.auth.domain.user.common.UserRole;
-import com.hanex.auth.domain.user.common.UserState;
+import com.hanex.auth.common.enums.UserRole;
+import com.hanex.auth.common.enums.UserState;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

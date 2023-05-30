@@ -3,14 +3,10 @@ package com.hanex.auth.controller.user.dto;
 import java.util.UUID;
 
 import com.hanex.auth.common.util.CommonEncoder;
-import com.hanex.auth.common.util.encrypt.EncryptString;
 import com.hanex.auth.domain.user.User;
-import com.hanex.auth.domain.user.common.UserRole;
-import com.hanex.auth.domain.user.common.UserState;
+import com.hanex.auth.common.enums.UserRole;
+import com.hanex.auth.common.enums.UserState;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

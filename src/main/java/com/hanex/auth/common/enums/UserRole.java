@@ -1,4 +1,4 @@
-package com.hanex.auth.domain.user.common;
+package com.hanex.auth.common.enums;
 
 /*
 권한 Dimension 설명

@@ -1,4 +1,4 @@
-package com.hanex.auth.domain.user.common;
+package com.hanex.auth.common.enums;
 
 public enum UserState {
 
