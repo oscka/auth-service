@@ -1,8 +1,8 @@
-package com.hanex.auth.domain.user;
+package com.hanex.auth.user.domain;
 
-import com.hanex.auth.controller.user.dto.UserDto;
+import com.hanex.auth.user.dto.UserDto;
 import com.hanex.auth.common.enums.UserRole;
-import com.hanex.auth.common.enums.UserState;
+import com.hanex.auth.common.enums.UserStatus;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
@@ -27,14 +28,18 @@ public class User {
 
 	private String loginId;
 
+	@Column("user_name")
 	private String name;
 
-	private UserState state;
+	@Column("user_status")
+	private UserStatus userStatus;
 
+	@Column("user_role")
 	private UserRole role;
 
 	private String email;
 
+	@Column("user_password")
 	private String password;
 
 	private String phone;
@@ -49,21 +54,23 @@ public class User {
 
 	// ---------------- 비지니스 로직 --------------- //
 	public void lock() {
-		this.state = UserState.LOCKED;
+		this.userStatus = UserStatus.LOCKED;
 	}
 
 	public void delete() {
-		this.state = UserState.DELETED;
+		this.userStatus = UserStatus.DELETED;
 	}
 
 	public UserDto.UserInfoResponse toDto(){
 		return UserDto.UserInfoResponse.builder()
-			.createdAt(this.createdAt)
-			.name(this.name)
-			.email(this.email)
-			.loginId(this.loginId)
-			.state(this.state)
-			.build();
+				.createdAt(this.createdAt)
+				.name(this.name)
+				.email(this.email)
+				.loginId(this.loginId)
+				.userStatus(this.userStatus)
+				.role(this.role)
+				.phone(this.phone)
+				.build();
 	}
 
 }

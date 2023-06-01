@@ -1,8 +1,8 @@
 spring:
   application:
-    name: starter
+    name: auth-service
   profiles:
-    active: local2
+    active: dev
   lifecycle:
     timeout-per-shutdown-phase: 10s # graceful shutdown 유예시간 설정
 

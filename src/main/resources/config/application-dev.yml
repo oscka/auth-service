@@ -1,15 +1,17 @@
 ###################
 # dev
 ###################
+
+server.port: 18080
+
 spring:
   datasource:
-    #url: jdbc:postgresql://host.docker.internal:5432/hanexdb?currentSchema=sc_starter
-    url: jdbc:postgresql://host.docker.internal:5432/hanexdb
+    url: jdbc:postgresql://localhost:5432/hanexdb
     driverClassName: org.postgresql.Driver
     username: hanex
     password: hanex1234
   redis:
-    host: host.docker.internal
+    host: localhost
     port: 6001
 
 logging:

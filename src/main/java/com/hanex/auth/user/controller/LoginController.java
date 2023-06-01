@@ -1,23 +1,15 @@
-package com.hanex.auth.controller.user;
+package com.hanex.auth.user.controller;
 
-import com.hanex.auth.common.security.JwtTokenProvider;
-import com.hanex.auth.controller.user.dto.UserDto;
-import com.hanex.auth.domain.user.User;
-import com.hanex.auth.service.LoginService;
-import com.hanex.auth.service.UserService;
+import com.hanex.auth.user.dto.UserDto;
+import com.hanex.auth.user.service.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 

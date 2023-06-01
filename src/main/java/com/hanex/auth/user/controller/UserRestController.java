@@ -1,7 +1,7 @@
-package com.hanex.auth.controller.user;
+package com.hanex.auth.user.controller;
 
-import com.hanex.auth.controller.user.dto.UserDto;
-import com.hanex.auth.service.UserService;
+import com.hanex.auth.user.dto.UserDto;
+import com.hanex.auth.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.hanex.auth.domain.user;
+package com.hanex.auth.user.domain;
 
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.data.jdbc.core.JdbcAggregateOperations;
@@ -14,16 +14,18 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 		this.jdbcAggregateOperations = jdbcAggregateOperations;
 	}
 
+
+	@Override
 	@Transactional
 	public void deleteById(UUID id) {
-		User account = this.jdbcAggregateOperations.findById(id, User.class);
-		if (account == null) {
-			throw new TransientDataAccessResourceException("account does not exist.id: " + id);
+		User user = this.jdbcAggregateOperations.findById(id, User.class);
+		if (user == null) {
+			throw new TransientDataAccessResourceException("User does not exist.id: " + id);
 		}
-
-		this.delete(account);
+		this.delete(user);
 	}
 
+	@Override
 	@Transactional
 	public void delete(User entity) {
 		entity.delete();

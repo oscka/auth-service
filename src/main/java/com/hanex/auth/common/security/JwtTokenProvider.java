@@ -1,10 +1,9 @@
 package com.hanex.auth.common.security;
 
 
-import com.hanex.auth.domain.user.User;
-import com.hanex.auth.service.UserService;
+import com.hanex.auth.user.domain.User;
+import com.hanex.auth.user.service.UserService;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -53,6 +52,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(new Date()) // 토큰 발행 시간 정보
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
+                .claim("role",user.getRole())
                 .compact(); // 위 설정대로 JWT 토큰을 생성한다는 의미.
     }
 
@@ -71,6 +71,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(now)
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
+                .claim("role",user.getRole()) // JWT payload에 저장되는 정보단위
                 .compact();
     }
 
