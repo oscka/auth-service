@@ -46,10 +46,10 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,secret.getBytes()) // 키와, 알고리즘을 넣는다.
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setIssuedAt(new Date()) // 토큰 발행 시간 정보
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
                 .setIssuer(issuer) // 발급자
                 .setAudience(audience) // 대상자
-                .setIssuedAt(new Date()) // 토큰 발행 시간 정보
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
                 .claim("role",user.getRole())
@@ -60,15 +60,13 @@ public class JwtTokenProvider {
     // 리프레시 토큰 생성 -- 엑세스토큰으로 요청을 먼저 -- 탈취에 취약함 -> 엑세스만 사용하다가 만료되면 리프레쉬토큰으로 다시 엑세스토큰을 발급 받아 사용
     public String createRefreshToken(User user) {
 
-        Date now = new Date();
-
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(now.getTime() + refreshTokenExpiration))
+                .setIssuedAt(new Date()) // 토큰 발행 시간 정보
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration))
                 .setIssuer(issuer) // 발급자
                 .setAudience(audience)
-                .setIssuedAt(now)
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
                 .claim("role",user.getRole()) // JWT payload에 저장되는 정보단위
