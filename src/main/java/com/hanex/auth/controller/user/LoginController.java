@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/security")
 @RequiredArgsConstructor
@@ -27,7 +28,6 @@ public class LoginController {
 
 
     private final LoginService loginService;
-
 
     @Operation(description = "토큰 생성 테스트")
     @PostMapping("/jwtlogin")

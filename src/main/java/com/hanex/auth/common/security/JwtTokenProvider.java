@@ -22,6 +22,18 @@ public class JwtTokenProvider {
     @Value("${jwt.secret}") // application.yml에 있는 변수값을 읽어오기위해사용한다
     private String secret; // application.yml에 있던 jwt.secret 값을 secret 변수에 저장한다.
 
+    @Value("${jwt.accessToken.expiration}")
+    private int accessTokenExpiration;
+
+    @Value("${jwt.refreshToken.expiration}")
+    private int refreshTokenExpiration;
+
+    @Value("${jwt.issuer}")
+    private String issuer;
+
+    @Value("${jwt.audience}")
+    private String audience;
+
     public JwtTokenProvider(UserService userService,
                             @Value("${jwt.secret}") String secret) {
         this.userService = userService;
@@ -31,14 +43,13 @@ public class JwtTokenProvider {
     // 로그인 서비스 할 때 같이 사용합니다. 엑세스 토큰 생성
     // header, payload, Signature 세 부분으로 구성
     public String createAccessToken(User user) {
-        int expireTime = 100000;
 
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,secret.getBytes()) // 키와, 알고리즘을 넣는다.
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
-                .setIssuer(SecurityConstant.TOKEN_ISSUER) // 발급자
-                .setAudience("user") // 대상자
+                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
+                .setIssuer(issuer) // 발급자
+                .setAudience(audience) // 대상자
                 .setIssuedAt(new Date()) // 토큰 발행 시간 정보
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
@@ -54,9 +65,9 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(now.getTime() + 1000000))
-                .setIssuer(SecurityConstant.TOKEN_ISSUER) // 발급자
-                .setAudience("user")
+                .setExpiration(new Date(now.getTime() + refreshTokenExpiration))
+                .setIssuer(issuer) // 발급자
+                .setAudience(audience)
                 .setIssuedAt(now)
                 .setSubject(String.valueOf(user.getId())) // 제목
                 .claim("loginId",user.getLoginId()) // JWT payload에 저장되는 정보단위
