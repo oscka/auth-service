@@ -43,10 +43,12 @@ public class JwtTokenProvider {
     // header, payload, Signature 세 부분으로 구성
     public String createAccessToken(User user) {
 
+        Date now = new Date();
+
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,secret.getBytes()) // 키와, 알고리즘을 넣는다.
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration)) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
+                .setExpiration(new Date(now.getTime() + accessTokenExpiration )) // 현재시간기준으로 만료시간을 잡아야하니까 현재시간에 만료시간을 넣어준다.
                 .setIssuer(issuer) // 발급자
                 .setAudience(audience) // 대상자
                 .setIssuedAt(new Date()) // 토큰 발행 시간 정보
@@ -65,7 +67,7 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(now.getTime() + refreshTokenExpiration))
+                .setExpiration(new Date(now.getTime() + refreshTokenExpiration * 1000))
                 .setIssuer(issuer) // 발급자
                 .setAudience(audience)
                 .setIssuedAt(now)
