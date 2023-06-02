@@ -8,4 +8,6 @@ public class SecurityConstant {
 
     public static final String TOKEN_ISSUER = "http://auth-service";
 
+    private static final int EXP = 1000 * 60 * 60* 24; // 24시간
+
 }

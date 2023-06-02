@@ -12,7 +12,7 @@ Host: localhost:8080
   "email" : "test@demo.com",
   "loginId" : "test",
   "password" : "test1234",
-  "role": "ROLE_CLIENT",
+  "role": "ROLE_ADMIN",
   "phone" : "01012345678",
   "state" : "ACTIVE"
 }
@@ -21,12 +21,12 @@ Host: localhost:8080
 ###
 # 로그인
 POST /security/jwtlogin
-Host: localhost:8080
+Host: localhost:18080
 Authorization: Bearer <jwt-token>
 Content-Type: application/json
 
 {
-  "loginId" : "test",
+  "loginId" : "admin",
   "password" : "test1234"
 }
 
